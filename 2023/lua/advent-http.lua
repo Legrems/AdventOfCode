@@ -40,4 +40,19 @@ function M.create_day(day, start_browser)
     end
 end
 
+function M.fetch_leaderboard()
+    local request = http_request.new_from_uri('https://adventofcode.com/2023/leaderboard/private/view/250642.json')
+    request.headers:append('cookie', 'session=' .. session)
+
+    local headers, stream = request:go()
+    local body = assert(stream:get_body_as_string())
+
+    if headers:get ":status" ~= "200" then
+        print('Error while fetching private leaderboard')
+    end
+
+    print('Writing in leaderboard.json...')
+    lib.write_file("leaderboard.json", body)
+end
+
 return M

@@ -21,7 +21,7 @@ end
 ---@param sep string
 ---@param n? number
 ---@param regexp? string
----@record string[] record
+---@return string[] record
 function string:split(sep, n, regexp)
     assert(sep ~= '')
     assert(n == nil or n >= 1)
@@ -51,14 +51,14 @@ end
 
 ---@param self string
 ---@param pattern string
----@record string[] records
+---@return function matchs
 function string:pgmatch(pattern)
     -- Return start pos, number, end pos equivalent for gmatch
     return self:gmatch("()" .. pattern .. "()")
 end
 
 ---@param element type
----@record boolean does the table contains this
+---@return boolean does the table contains this
 function table:contains(element)
     for _, v in pairs(self) do
         if v == element then
@@ -69,7 +69,7 @@ function table:contains(element)
 end
 
 ---@param default function or ?
----@record table 'defaultdict' like table
+---@return table 'defaultdict' like table
 function M.defaultable(default)
     local T = {}
     local metatable = {

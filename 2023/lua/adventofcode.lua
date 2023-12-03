@@ -3,9 +3,15 @@ local params = {...}
 local socket = require 'socket'
 local advent_http = require 'advent-http'
 local lib = require 'lib'
+local leaderboard = require 'leaderboard'
 
 if params[1] == "set-session" then
     lib.write_file(".aocsession", io.read("*l"))
+end
+
+if params[1] == "rank" and params[2] == "--fetch" then
+    advent_http.fetch_leaderboard()
+    os.exit()
 end
 
 if #params < 2 then
@@ -59,6 +65,13 @@ if params[3] == 'show' then
     else
         print(input_day)
     end
+    os.exit()
+end
+
+if params[3] == 'rank' then
+    local day = tonumber(params[2]) or 1
+    local summary = params[4] == "--summary" or false
+    leaderboard.show_leaderboard_for_day(day, summary)
     os.exit()
 end
 
