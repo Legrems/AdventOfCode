@@ -49,4 +49,23 @@ function string:split(sep, n, regexp)
     return record
 end
 
+---@param self string
+---@param pattern string
+---@record string[] records
+function string:pgmatch(pattern)
+    -- Return start pos, number, end pos equivalent for gmatch
+    return self:gmatch("()" .. pattern .. "()")
+end
+
+---@param element type
+---@record boolean does the table contains this
+function table:contains(element)
+    for _, v in pairs(self) do
+        if v == element then
+            return true
+        end
+    end
+    return false
+end
+
 return M
