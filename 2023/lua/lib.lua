@@ -68,4 +68,50 @@ function table:contains(element)
     return false
 end
 
+---@param default function or ?
+---@record table 'defaultdict' like table
+function M.defaultable(default)
+    local T = {}
+    local metatable = {
+        __index = function(t, key)
+            if not rawget(t, key) then
+                if type(default) == 'function' then
+                    rawset(t, key, default(key))
+                else
+                    local f = function(_)
+                        return M.deepcopy(default)
+                    end
+                    rawset(t, key, f(key))
+                end
+            end
+            return rawget(t, key)
+        end
+    }
+    return setmetatable(T, metatable)
+end
+
+---@param object table 
+---@param seen? table
+---@results object deepcopied table
+function M.deepcopy(object, seen)
+    -- Keep track of the copied object
+    seen = seen or {}
+    if object == nil then return nil end
+    if seen[object] then return seen[object] end
+
+    local out
+    if type(object) == 'table' then
+        out = {}
+        seen[object] = out
+
+        for k, v in next, object, nil do
+            out[M.deepcopy(k, seen)] = M.deepcopy(v, seen)
+        end
+        setmetatable(out, M.deepcopy(getmetatable(object), seen))
+    else -- number, string, boolean, etc
+        out = object
+    end
+    return out
+end
+
 return M

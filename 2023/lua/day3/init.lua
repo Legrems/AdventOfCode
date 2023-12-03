@@ -1,6 +1,7 @@
 local M = {}
 
 local lib = require 'lib'
+local inspect = require 'inspect'
 
 function M.day(input, debug)
     local part_1 = 0
@@ -9,7 +10,7 @@ function M.day(input, debug)
     local schematic = input:split("\n")
     local invalidmap = {'.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
     local validmap = {'*'}
-    local gears = {}
+    local gears = lib.defaultable(lib.defaultable({}))
     for linei, line in pairs(schematic) do
         if line == nil or line == "" then goto continue end
 
@@ -23,20 +24,12 @@ function M.day(input, debug)
         end
 
         for startpos, k, endpos in line:pgmatch('(%d+)') do
-
             local invalid = true
 
             for lini = linei - 1, linei + 1 do
                 if lini <= 0 then goto skip end
-                if gears[lini] == nil then
-                    gears[lini] = {}
-                end
 
                 for pos = startpos - 1, endpos do
-                    if gears[lini][pos] == nil then
-                        gears[lini][pos] = {}
-                    end
-
                     local char = schematic[lini]:sub(pos, pos)
                     if char ~= '' and not table.contains(invalidmap, char) then
                         invalid = false

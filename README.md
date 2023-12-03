@@ -10,6 +10,7 @@ trizen -S lua luarocks
 sudo luarocks install luasocket
 sudo luarocks install http
 sudo luarocks install luaposix
+sudo luarocks install inspect
 ```
 
 ### Set the AOC session

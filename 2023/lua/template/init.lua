@@ -1,5 +1,8 @@
 local M = {}
 
+local lib = require 'lib'
+local inspect = require 'inspect'
+
 function M.day(input, debug)
     local part_1 = 0
     local part_2 = 0
