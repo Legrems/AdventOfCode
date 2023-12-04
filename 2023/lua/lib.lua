@@ -68,7 +68,7 @@ function table:contains(element)
     return false
 end
 
----@param default function or ?
+---@param default any or function
 ---@return table 'defaultdict' like table
 function M.defaultable(default)
     local T = {}

@@ -7,10 +7,7 @@ function M.day(input, debug)
     local part_1 = 0
     local part_2 = 0
 
-    local multi = {}
-    for i, _ in pairs(input:split("\n")) do
-        multi[i] = 1
-    end
+    local multi = lib.defaultable(1)
 
     for gameid, line in pairs(input:split("\n")) do
         if line == nil or line == "" then goto continue end
