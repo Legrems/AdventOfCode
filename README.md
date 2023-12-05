@@ -13,6 +13,7 @@ sudo luarocks install luaposix
 sudo luarocks install inspect
 sudo luarocks install tablua
 sudo luarocks install lua-cjson
+sudo luarocks install luafilesystem
 ```
 
 ### Set the AOC session
