@@ -63,7 +63,7 @@ function M.show_leaderboard_summary(board, day)
                 member[2]["2"] ~= nil and str_date(member[2]["2"].get_star_ts) or "---",
                 member[2]["2"] ~= nil and string.format('%.0f (s)', member[2]["2"].get_star_ts - first_ranking_p2) or "---",
                 string.format('%.0f (min)', (member[2]["1"].get_star_ts - day_at_6) / 60),
-                member[2]["2"] ~= nil and string.format('%.0f (min)', (member[2]["2"].get_star_ts - member[2]["1"].get_star_ts) / 60) or "---",
+                member[2]["2"] ~= nil and string.format('%.0f (s)', (member[2]["2"].get_star_ts - member[2]["1"].get_star_ts)) or "---",
             }
         )
     end

@@ -186,4 +186,28 @@ function M.day5_workon_range(range, map)
     return mapping
 end
 
+---@param t1 table First object to compare
+---@param t2 table Second object to compare
+function table.equals(t1, t2)
+    for i, v1 in pairs(t1) do
+        for j, v2 in pairs(t2) do
+            if i == j then
+                if v1 ~= v2 then
+                    return false
+                end
+            end
+        end
+    end
+    return true
+end
+
+function table.indexof(t1, value)
+    for i, v1 in pairs(t1) do
+        if v1 == value then
+            return i
+        end
+    end
+    return -1
+end
+
 return M

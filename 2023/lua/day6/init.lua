@@ -30,7 +30,7 @@ function M.day(input, debug)
     for _, d in pairs(distances) do
         xdistance = xdistance .. tostring(d)
     end
-    part_2 = daylib.run({tonumber(xtime)}, {tonumber(xdistance)})
+    -- part_2 = daylib.run({tonumber(xtime)}, {tonumber(xdistance)})
 
     return {part_1, part_2}
 end
