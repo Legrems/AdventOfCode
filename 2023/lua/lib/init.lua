@@ -59,7 +59,7 @@ function string:pgmatch(pattern)
     return self:gmatch("()" .. pattern .. "()")
 end
 
----@param element type
+---@param element any
 ---@return boolean does the table contains this
 function table:contains(element)
     for _, v in pairs(self) do
@@ -68,6 +68,18 @@ function table:contains(element)
         end
     end
     return false
+end
+
+
+---@param self table
+---@param f function
+---@return table newtable
+function table:map(f)
+    local n = {}
+    for _, v in pairs(self) do
+        table.insert(n, f(v))
+    end
+    return n
 end
 
 ---@param default any or function
@@ -208,6 +220,40 @@ function table.indexof(t1, value)
         end
     end
     return -1
+end
+
+function math.gcd( m, n )
+    while n ~= 0 do
+        local q = m
+        m = n
+        n = q % n
+    end
+    return m
+end
+
+function math.lcm( m, n )
+    return ( m ~= 0 and n ~= 0 ) and m * n / math.gcd( m, n ) or 0
+end
+
+---@param str string
+---@param self string
+---@return boolean
+function string:startswith(str)
+    local f = self:find(str)
+    if f == nil then return false end
+    return f == 1
+end
+
+
+---@param str string
+---@param self string
+---@return boolean
+function string:endswith(str)
+    -- More efficiant than:
+    -- return self:reverse():startswith(str:reverse())
+    local f = self:find(str, -1)
+    if f == nil then return false end
+    return f == (#self - #str + 1)
 end
 
 return M

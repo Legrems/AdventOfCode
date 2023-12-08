@@ -35,5 +35,11 @@ This will open the browser on the correct page, creating a new folder from the t
 #### Show Part 1 + 2 summary, with ordering
 `lua adventofcode.lua day <day> rank --summary`
 
+#### Show global summary
+`lua adventofcode.lua day 1 rank --all --sort=points --filter=...`
+
+`lua adventofcode.lua day 1 rank --all --days=1-3,6`
+
+
 #### Fetch the leaderboard status (don't do it too often >15 minutes aoc says)
 `lua adventofcode.lua rank --fetch`

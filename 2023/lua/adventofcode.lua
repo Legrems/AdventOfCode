@@ -7,8 +7,26 @@ local leaderboard = require 'leaderboard'
 
 if params[3] == 'rank' then
     local day = tonumber(params[2]) or 1
-    local summary = params[4] == "--summary" or false
-    leaderboard.show_leaderboard_for_day(day, summary)
+    local summary = params[4] == '--summary' or false
+    local all = params[4] == '--all' or false
+
+    local sorting, filtering, days
+    for _, param in pairs(params) do
+        if param:find('--sort=') then
+            sorting = param:gsub('--sort=', '')
+        elseif param:find('--filter=') then
+            filtering = param:gsub('--filter=', '')
+        elseif param:find('--days=') then
+            days = param:gsub('--days=', '')
+        end
+    end
+
+    if all then
+        leaderboard.show_local_leaderboard(filtering, sorting, days)
+    else
+        leaderboard.show_leaderboard_for_day(day, summary)
+    end
+
     os.exit()
 end
 
