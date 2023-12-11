@@ -213,6 +213,9 @@ function table.equals(t1, t2)
     return true
 end
 
+---@param t1 table
+---@param value any
+---@return number
 function table.indexof(t1, value)
     for i, v1 in pairs(t1) do
         if v1 == value then
@@ -222,6 +225,9 @@ function table.indexof(t1, value)
     return -1
 end
 
+---@param m number
+---@param n number
+---@return number
 function math.gcd( m, n )
     while n ~= 0 do
         local q = m
@@ -231,6 +237,9 @@ function math.gcd( m, n )
     return m
 end
 
+---@param m number
+---@param n number
+---@return number
 function math.lcm( m, n )
     return ( m ~= 0 and n ~= 0 ) and m * n / math.gcd( m, n ) or 0
 end
